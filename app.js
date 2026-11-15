@@ -154,7 +154,7 @@
     for (var i = 0; i < cards.length; i++) {
       grid.appendChild(createCard(cards[i], i));
     }
-    setStatus(cards.length + " 枚");
+    setStatus("");
   }
 
   function boot() {
