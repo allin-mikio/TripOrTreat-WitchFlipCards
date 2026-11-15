@@ -5,8 +5,6 @@
   --text: #3a2e24;
   --muted: #6e5a48;
   --card-gap: 6px;
-  /* 列数は後から調整しやすいよう変数化（スマホ既定は4列） */
-  --cols: 4;
   --flip-ms: 420ms;
   --font: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP",
     "Yu Gothic", YuGothic, Meiryo, sans-serif;
@@ -59,19 +57,29 @@ body {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  /*
+    PCでカードが巨大化しないよう:
+    - 1枚あたり約90〜110px
+    - 画面が広いときは列を増やし、グリッド全体の最大幅も制限
+  */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--card-gap);
+  width: 100%;
+  max-width: 440px;
+  margin-inline: auto;
 }
 
 @media (min-width: 600px) {
-  :root {
-    --cols: 6;
+  .card-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    max-width: 660px;
   }
 }
 
 @media (min-width: 900px) {
-  :root {
-    --cols: 8;
+  .card-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    max-width: 880px;
   }
 }
 
@@ -79,6 +87,9 @@ body {
 
 .card {
   aspect-ratio: 1 / 1;
+  width: 100%;
+  container-type: inline-size;
+  container-name: card;
   perspective: 800px;
   cursor: pointer;
   border: none;
@@ -140,7 +151,8 @@ body {
 
 .yomi {
   flex: 0 0 auto;
-  font-size: clamp(0.62rem, 3.4vw, 1rem);
+  /* カード幅基準（画面幅 vw だと PC で巨大化する） */
+  font-size: clamp(0.58rem, 12cqw, 0.95rem);
   font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1.2;
@@ -153,7 +165,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  font-size: clamp(1.4rem, 9vw, 3.2rem);
+  font-size: clamp(1.35rem, 48cqw, 2.6rem);
   font-weight: 800;
   line-height: 1;
 }
@@ -165,12 +177,25 @@ body {
   justify-content: center;
   gap: 0.28em;
   padding: 0 3%;
-  font-size: clamp(0.55rem, 3vw, 0.9rem);
+  font-size: clamp(0.52rem, 11cqw, 0.85rem);
   font-weight: 700;
   letter-spacing: 0.03em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* container query 非対応端末向けフォールバック */
+@supports not (font-size: 1cqw) {
+  .yomi {
+    font-size: 0.7rem;
+  }
+  .kanji {
+    font-size: 1.8rem;
+  }
+  .face-footer {
+    font-size: 0.62rem;
+  }
 }
 
 .face-front .face-footer {
