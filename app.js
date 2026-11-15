@@ -72,10 +72,11 @@
     var footer = document.createElement("div");
     footer.className = "face-footer";
 
-    var mark = document.createElement("span");
+    var mark = document.createElement("img");
     mark.className = "footer-mark";
+    mark.src = "finger.png?v=14";
+    mark.alt = "";
     mark.setAttribute("aria-hidden", "true");
-    // finger.png をマスクにして、帯の色（currentColor）で描画
 
     var en = document.createElement("span");
     en.className = "en";
