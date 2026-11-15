@@ -210,15 +210,19 @@ body {
 
 .footer-mark {
   flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  line-height: 0;
-}
-
-.footer-mark-svg {
-  width: 1.35em;
-  height: 0.72em;
-  display: block;
+  width: 1.55em;
+  height: 0.95em;
+  background-color: currentColor;
+  -webkit-mask-image: url("finger.png");
+  mask-image: url("finger.png");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-mode: luminance;
+  mask-mode: luminance;
 }
 
 .en {
