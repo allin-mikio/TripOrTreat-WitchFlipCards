@@ -2,7 +2,7 @@
   "use strict";
 
   var CSV_URL = "cards.csv";
-  var AUTO_BACK_MS = 10000;
+  var AUTO_BACK_MS = 3000;
 
   var grid = document.getElementById("card-grid");
   var statusEl = document.getElementById("status");
